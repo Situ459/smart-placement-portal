@@ -46,5 +46,38 @@ public class DashboardService {
         dashboard.put("totalResumes", resumeRepository.count());
 
         return dashboard;
+        
+        
+    }
+    
+    public Map<String, Long> getStudentDashboard(Long studentId) {
+
+        Map<String, Long> dashboard = new HashMap<>();
+
+        dashboard.put(
+                "applications",
+                applicationRepository.countByStudentId(studentId));
+
+        dashboard.put(
+                "resumes",
+                resumeRepository.countByStudentId(studentId));
+
+        return dashboard;
+    }
+
+    public Map<String, Long> getRecruiterDashboard(Long recruiterId) {
+
+        Map<String, Long> dashboard = new HashMap<>();
+
+        dashboard.put(
+                "jobsPosted",
+                jobRepository.countByRecruiterId(recruiterId));
+
+        dashboard.put(
+                "applicationsReceived",
+                applicationRepository
+                        .countByJobRecruiterId(recruiterId));
+
+        return dashboard;
     }
 }

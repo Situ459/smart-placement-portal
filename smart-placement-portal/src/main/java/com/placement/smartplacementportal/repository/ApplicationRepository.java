@@ -10,4 +10,8 @@ public interface ApplicationRepository extends JpaRepository<Application, Long> 
 	List<Application> findByStudent(Student student);
 	
 	List<Application> findByJob(Job job);
+	
+	long countByStudentId(Long studentId);
+
+	long countByJobRecruiterId(Long recruiterId);
 }
