@@ -1,20 +1,71 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import LandingPage from "./pages/LandingPage";
+import Login from "./pages/Login";
+import StudentDashboard from "./pages/StudentDashboard";
+import RecruiterDashboard from "./pages/RecruiterDashboard";
+import AdminDashboard from "./pages/AdminDashboard";
+import JobList from "./pages/JobList";
+import MyApplications from "./pages/MyApplications";
+
+import ProtectedRoute from "./routes/ProtectedRoute";
+
 function App() {
   return (
-    <div style={{ textAlign: "center", padding: "50px" }}>
-      <h1>AI Powered Smart Placement Portal</h1>
+    <BrowserRouter>
+      <Routes>
 
-      <h2>Welcome to Campus Placement System</h2>
+        <Route path="/" element={<LandingPage />} />
 
-      <p>
-        Helping students find jobs and recruiters hire talented candidates.
-      </p>
+        <Route path="/login" element={<Login />} />
 
-      <button>Get Started</button>
+        <Route
+          path="/student-dashboard"
+          element={
+            <ProtectedRoute allowedRole="STUDENT">
+              <StudentDashboard />
+            </ProtectedRoute>
+          }
+        />
 
-      <button style={{ marginLeft: "10px" }}>
-        Login
-      </button>
-    </div>
+        <Route
+          path="/recruiter-dashboard"
+          element={
+            <ProtectedRoute allowedRole="RECRUITER">
+              <RecruiterDashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin-dashboard"
+          element={
+            <ProtectedRoute allowedRole="ADMIN">
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/job-list"
+          element={
+            <ProtectedRoute allowedRole="STUDENT">
+              <JobList />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/my-applications"
+          element={
+            <ProtectedRoute allowedRole="STUDENT">
+              <MyApplications />
+            </ProtectedRoute>
+          }
+        />
+
+      </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -29,7 +29,7 @@ public class DashboardController {
 
     @GetMapping("/dashboard/recruiter/{recruiterId}")
     public Map<String, Long> getRecruiterDashboard(
-            @PathVariable Long recruiterId) {
+            @PathVariable Long recruiterId) {	
 
         return dashboardService
                 .getRecruiterDashboard(recruiterId);
