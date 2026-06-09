@@ -9,3 +9,12 @@ export const getAllJobs = async () => {
 
   return response.data;
 };
+
+export const createJob = async (jobData) => {
+  const response = await axios.post(
+    `${BASE_URL}/jobs`,
+    jobData
+  );
+
+  return response.data;
+};

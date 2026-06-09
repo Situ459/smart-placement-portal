@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { getRecruiterDashboard } from "../services/dashboardService";
 import LogoutButton from "../components/LogoutButton";
+import { useNavigate } from "react-router-dom";
 
 function RecruiterDashboard() {
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadDashboard();
@@ -51,6 +53,11 @@ function RecruiterDashboard() {
         </div>
 
         <h1>Recruiter Dashboard</h1>
+        <button
+  onClick={() => navigate("/post-job")}
+>
+  Post New Job
+</button>
 
 <LogoutButton />
 

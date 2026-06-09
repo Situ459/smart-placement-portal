@@ -7,6 +7,7 @@ import RecruiterDashboard from "./pages/RecruiterDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import JobList from "./pages/JobList";
 import MyApplications from "./pages/MyApplications";
+import PostJob from "./pages/PostJob";
 
 import ProtectedRoute from "./routes/ProtectedRoute";
 
@@ -63,6 +64,15 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        <Route
+  path="/post-job"
+  element={
+    <ProtectedRoute allowedRole="RECRUITER">
+      <PostJob />
+    </ProtectedRoute>
+  }
+/>
 
       </Routes>
     </BrowserRouter>
