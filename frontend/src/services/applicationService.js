@@ -27,3 +27,11 @@ export const getStudentApplications = async (studentId) => {
 
   return response.data;
 };
+
+export const getApplicationsByJob = async (jobId) => {
+  const response = await axios.get(
+    `${BASE_URL}/applications/job/${jobId}`
+  );
+
+  return response.data;
+};

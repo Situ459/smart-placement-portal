@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { getRecruiterJobs } from "../services/jobService";
+import { useNavigate } from "react-router-dom";
 
 function MyJobs() {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadJobs();
@@ -42,19 +45,24 @@ function MyJobs() {
           <h2>{job.title}</h2>
 
           <p>
-            <strong>Location:</strong>{" "}
-            {job.location}
+            <strong>Location:</strong> {job.location}
           </p>
 
           <p>
-            <strong>Salary:</strong>{" "}
-            {job.salaryPackage}
+            <strong>Salary:</strong> {job.salaryPackage}
           </p>
 
           <p>
-            <strong>Status:</strong>{" "}
-            {job.status}
+            <strong>Status:</strong> {job.status}
           </p>
+
+          <button
+            onClick={() =>
+              navigate(`/applicants/${job.id}`)
+            }
+          >
+            View Applicants
+          </button>
         </div>
       ))}
     </div>
