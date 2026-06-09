@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getRecruiterDashboard } from "../services/dashboardService";
 import LogoutButton from "../components/LogoutButton";
-import { useNavigate } from "react-router-dom";
 
 function RecruiterDashboard() {
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(true);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,6 +33,8 @@ function RecruiterDashboard() {
     <div style={{ padding: "30px" }}>
       <h1>Recruiter Dashboard</h1>
 
+      <LogoutButton />
+
       <div
         style={{
           display: "flex",
@@ -52,15 +55,6 @@ function RecruiterDashboard() {
           <h2>{dashboardData.jobsPosted}</h2>
         </div>
 
-        <h1>Recruiter Dashboard</h1>
-        <button
-  onClick={() => navigate("/post-job")}
->
-  Post New Job
-</button>
-
-<LogoutButton />
-
         <div
           style={{
             padding: "20px",
@@ -73,6 +67,34 @@ function RecruiterDashboard() {
 
           <h2>{dashboardData.applicationsReceived}</h2>
         </div>
+      </div>
+
+      <div
+        style={{
+          marginTop: "30px",
+          display: "flex",
+          gap: "15px",
+        }}
+      >
+        <button
+          onClick={() => navigate("/post-job")}
+          style={{
+            padding: "10px 20px",
+            cursor: "pointer",
+          }}
+        >
+          Post New Job
+        </button>
+
+        <button
+          onClick={() => navigate("/my-jobs")}
+          style={{
+            padding: "10px 20px",
+            cursor: "pointer",
+          }}
+        >
+          View My Jobs
+        </button>
       </div>
     </div>
   );

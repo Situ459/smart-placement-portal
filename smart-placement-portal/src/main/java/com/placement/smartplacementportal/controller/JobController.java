@@ -24,6 +24,13 @@ public class JobController {
         return jobService.getJobById(id);
     }
 
+    @GetMapping("/jobs/recruiter/{recruiterId}")
+    public List<Job> getJobsByRecruiter(
+            @PathVariable Long recruiterId) {
+
+        return jobService.getJobsByRecruiter(recruiterId);
+    }
+
     @PostMapping("/jobs")
     public Job saveJob(@RequestBody Job job) {
         return jobService.saveJob(job);

@@ -8,6 +8,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import JobList from "./pages/JobList";
 import MyApplications from "./pages/MyApplications";
 import PostJob from "./pages/PostJob";
+import MyJobs from "./pages/MyJobs";
 
 import ProtectedRoute from "./routes/ProtectedRoute";
 
@@ -70,6 +71,15 @@ function App() {
   element={
     <ProtectedRoute allowedRole="RECRUITER">
       <PostJob />
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/my-jobs"
+  element={
+    <ProtectedRoute allowedRole="RECRUITER">
+      <MyJobs />
     </ProtectedRoute>
   }
 />

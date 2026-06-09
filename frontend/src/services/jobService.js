@@ -10,10 +10,26 @@ export const getAllJobs = async () => {
   return response.data;
 };
 
+export const getRecruiterJobs = async (recruiterId) => {
+  const response = await axios.get(
+    `${BASE_URL}/jobs/recruiter/${recruiterId}`
+  );
+
+  return response.data;
+};
+
 export const createJob = async (jobData) => {
   const response = await axios.post(
     `${BASE_URL}/jobs`,
     jobData
+  );
+
+  return response.data;
+};
+
+export const getJobById = async (id) => {
+  const response = await axios.get(
+    `${BASE_URL}/jobs/${id}`
   );
 
   return response.data;
