@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import com.placement.smartplacementportal.dto.StudentRegistrationDTO;
 
 import com.placement.smartplacementportal.entity.Student;
 import com.placement.smartplacementportal.service.StudentService;
@@ -27,6 +28,13 @@ public class StudentController {
     @PostMapping("/students")
     public Student saveStudent(@RequestBody Student student) {
         return studentService.saveStudent(student);
+    }
+    
+    @PostMapping("/students/register")
+    public Student registerStudent(
+            @RequestBody StudentRegistrationDTO dto) {
+
+        return studentService.registerStudent(dto);
     }
     
     @GetMapping("/students/{id}")

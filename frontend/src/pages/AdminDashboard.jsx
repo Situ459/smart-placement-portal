@@ -34,7 +34,13 @@ function AdminDashboard() {
 
       <LogoutButton />
 
-      <div style={{ marginTop: "20px" }}>
+      <div
+        style={{
+          marginTop: "20px",
+          display: "flex",
+          gap: "10px",
+        }}
+      >
         <button
           onClick={() => navigate("/admin-jobs")}
           style={{
@@ -43,6 +49,26 @@ function AdminDashboard() {
           }}
         >
           Manage Jobs
+        </button>
+
+        <button
+          onClick={() => navigate("/admin-students")}
+          style={{
+            padding: "10px 20px",
+            cursor: "pointer",
+          }}
+        >
+          Manage Students
+        </button>
+
+        <button
+          onClick={() => navigate("/admin-recruiters")}
+          style={{
+            padding: "10px 20px",
+            cursor: "pointer",
+          }}
+        >
+          Manage Recruiters
         </button>
       </div>
 

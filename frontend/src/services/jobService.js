@@ -35,9 +35,29 @@ export const getJobById = async (id) => {
   return response.data;
 };
 
+export const updateJob = async (
+  id,
+  jobData
+) => {
+  const response = await axios.put(
+    `${BASE_URL}/jobs/${id}`,
+    jobData
+  );
+
+  return response.data;
+};
+
 export const deleteJob = async (jobId) => {
   const response = await axios.delete(
     `${BASE_URL}/jobs/${jobId}`
+  );
+
+  return response.data;
+};
+
+export const closeJob = async (jobId) => {
+  const response = await axios.put(
+    `${BASE_URL}/jobs/${jobId}/close`
   );
 
   return response.data;

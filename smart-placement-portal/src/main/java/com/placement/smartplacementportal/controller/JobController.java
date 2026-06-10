@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.placement.smartplacementportal.entity.Job;
 import com.placement.smartplacementportal.service.JobService;
+import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 public class JobController {
@@ -35,10 +36,27 @@ public class JobController {
     public Job saveJob(@RequestBody Job job) {
         return jobService.saveJob(job);
     }
+    
+    @PutMapping("/jobs/{id}")
+    public Job updateJob(
+            @PathVariable Long id,
+            @RequestBody Job updatedJob) {
+
+        return jobService.updateJob(id, updatedJob);
+    }
+
+    @PutMapping("/jobs/{id}/close")
+    public Job closeJob(
+            @PathVariable Long id) {
+
+        return jobService.closeJob(id);
+    }
 
     @DeleteMapping("/jobs/{id}")
     public String deleteJob(@PathVariable Long id) {
+
         jobService.deleteJob(id);
+
         return "Job deleted successfully";
     }
 }

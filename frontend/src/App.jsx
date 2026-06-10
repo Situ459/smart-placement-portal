@@ -12,6 +12,9 @@ import MyJobs from "./pages/MyJobs";
 import ApplicantList from "./pages/ApplicantList";
 import AdminJobs from "./pages/AdminJobs";
 import ProtectedRoute from "./routes/ProtectedRoute";
+import AdminStudents from "./pages/AdminStudents";
+import AdminRecruiters from "./pages/AdminRecruiters";
+import EditJob from "./pages/EditJob";
 
 function App() {
   return (
@@ -99,6 +102,33 @@ function App() {
   element={
     <ProtectedRoute allowedRole="ADMIN">
       <AdminJobs />
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/admin-students"
+  element={
+    <ProtectedRoute allowedRole="ADMIN">
+      <AdminStudents />
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/admin-recruiters"
+  element={
+    <ProtectedRoute allowedRole="ADMIN">
+      <AdminRecruiters />
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/edit-job/:id"
+  element={
+    <ProtectedRoute allowedRole="RECRUITER">
+      <EditJob />
     </ProtectedRoute>
   }
 />
