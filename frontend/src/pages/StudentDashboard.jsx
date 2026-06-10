@@ -15,7 +15,11 @@ function StudentDashboard() {
 
   const loadDashboard = async () => {
     try {
-      const data = await getStudentDashboard(2);
+      const studentId =
+        localStorage.getItem("studentId");
+
+      const data =
+        await getStudentDashboard(studentId);
 
       setDashboardData(data);
     } catch (error) {

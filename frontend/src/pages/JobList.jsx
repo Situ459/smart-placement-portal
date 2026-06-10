@@ -25,13 +25,19 @@ function JobList() {
 
   const loadApplications = async () => {
     try {
-      const data = await getStudentApplications(2);
+
+      const studentId =
+        localStorage.getItem("studentId");
+
+      const data =
+        await getStudentApplications(studentId);
 
       const jobIds = data.map(
         (application) => application.job.id
       );
 
       setAppliedJobs(jobIds);
+
     } catch (error) {
       console.error(error);
     }
@@ -39,12 +45,15 @@ function JobList() {
 
   const handleApply = async (jobId) => {
     try {
+
       await applyJob(jobId);
 
       alert("Application Submitted Successfully");
 
       loadApplications();
+
     } catch (error) {
+
       console.error(error);
 
       alert("You may have already applied for this job");

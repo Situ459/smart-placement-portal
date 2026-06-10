@@ -15,20 +15,25 @@ function UploadResume() {
     }
 
     try {
-      setLoading(true);
+  setLoading(true);
 
-      const response = await uploadResume(2, file);
+  const studentId =
+    localStorage.getItem("studentId");
 
-      alert(
-        `Resume uploaded successfully: ${response.fileName}`
-      );
+  const response =
+    await uploadResume(studentId, file);
 
-      navigate("/student-dashboard");
-    } catch (error) {
-      console.error(error);
+  alert(
+    `Resume uploaded successfully: ${response.fileName}`
+  );
 
-      alert("Resume upload failed");
-    } finally {
+  navigate("/student-dashboard");
+
+} catch (error) {
+  console.error(error);
+
+  alert("Resume upload failed");
+} finally {
       setLoading(false);
     }
   };

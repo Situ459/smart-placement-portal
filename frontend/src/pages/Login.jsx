@@ -31,6 +31,30 @@ function Login() {
         response.data.role
       );
 
+      localStorage.setItem(
+        "email",
+        response.data.email
+      );
+
+      localStorage.setItem(
+        "userId",
+        response.data.userId
+      );
+
+      if (response.data.studentId) {
+        localStorage.setItem(
+          "studentId",
+          response.data.studentId
+        );
+      }
+
+      if (response.data.recruiterId) {
+        localStorage.setItem(
+          "recruiterId",
+          response.data.recruiterId
+        );
+      }
+
       alert("Login Successful");
 
       if (response.data.role === "STUDENT") {

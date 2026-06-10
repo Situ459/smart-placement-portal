@@ -10,16 +10,22 @@ function MyApplications() {
   }, []);
 
   const loadApplications = async () => {
-    try {
-      const data = await getStudentApplications(2);
+  try {
 
-      setApplications(data);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    const studentId =
+      localStorage.getItem("studentId");
+
+    const data =
+      await getStudentApplications(studentId);
+
+    setApplications(data);
+
+  } catch (error) {
+    console.error(error);
+  } finally {
+    setLoading(false);
+  }
+};
 
   if (loading) {
     return <h2>Loading Applications...</h2>;

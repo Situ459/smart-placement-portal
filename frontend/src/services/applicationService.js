@@ -3,11 +3,15 @@ import axios from "axios";
 const BASE_URL = "http://localhost:8080";
 
 export const applyJob = async (jobId) => {
+
+  const studentId =
+    localStorage.getItem("studentId");
+
   const response = await axios.post(
     `${BASE_URL}/applications`,
     {
       student: {
-        id: 2
+        id: studentId
       },
       job: {
         id: jobId

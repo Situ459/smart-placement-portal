@@ -17,16 +17,22 @@ function MyJobs() {
   }, []);
 
   const loadJobs = async () => {
-    try {
-      const data = await getRecruiterJobs(1);
+  try {
 
-      setJobs(data);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    const recruiterId =
+      localStorage.getItem("recruiterId");
+
+    const data =
+      await getRecruiterJobs(recruiterId);
+
+    setJobs(data);
+
+  } catch (error) {
+    console.error(error);
+  } finally {
+    setLoading(false);
+  }
+};
 
   const handleDelete = async (jobId) => {
     try {

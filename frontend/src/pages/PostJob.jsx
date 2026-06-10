@@ -10,37 +10,40 @@ function PostJob() {
 
   const handleSubmit = async () => {
 
-    try {
+  try {
 
-      await createJob({
-        recruiter: {
-          id: 1
-        },
-        title,
-        description: title,
-        location,
-        salaryPackage,
-        jobType: "FULL_TIME",
-        requiredSkills,
-        minimumCgpa: 7,
-        deadline: "2027-12-31",
-        status: "OPEN"
-      });
+    const recruiterId =
+      localStorage.getItem("recruiterId");
 
-      alert("Job Posted Successfully");
+    await createJob({
+      recruiter: {
+        id: recruiterId
+      },
+      title,
+      description: title,
+      location,
+      salaryPackage,
+      jobType: "FULL_TIME",
+      requiredSkills,
+      minimumCgpa: 7,
+      deadline: "2027-12-31",
+      status: "OPEN"
+    });
 
-      setTitle("");
-      setLocation("");
-      setSalaryPackage("");
-      setRequiredSkills("");
+    alert("Job Posted Successfully");
 
-    } catch (error) {
+    setTitle("");
+    setLocation("");
+    setSalaryPackage("");
+    setRequiredSkills("");
 
-      console.error(error);
+  } catch (error) {
 
-      alert("Failed to post job");
-    }
-  };
+    console.error(error);
+
+    alert("Failed to post job");
+  }
+};
 
   return (
     <div style={{ padding: "30px" }}>

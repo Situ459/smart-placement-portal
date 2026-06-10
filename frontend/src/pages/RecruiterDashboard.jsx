@@ -15,7 +15,11 @@ function RecruiterDashboard() {
 
   const loadDashboard = async () => {
     try {
-      const data = await getRecruiterDashboard(1);
+      const recruiterId =
+        localStorage.getItem("recruiterId");
+
+      const data =
+        await getRecruiterDashboard(recruiterId);
 
       setDashboardData(data);
     } catch (error) {
