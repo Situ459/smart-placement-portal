@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getAdminDashboard } from "../services/dashboardService";
 import LogoutButton from "../components/LogoutButton";
 
 function AdminDashboard() {
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadDashboard();
@@ -29,12 +32,26 @@ function AdminDashboard() {
     <div style={{ padding: "30px" }}>
       <h1>Admin Dashboard</h1>
 
+      <LogoutButton />
+
+      <div style={{ marginTop: "20px" }}>
+        <button
+          onClick={() => navigate("/admin-jobs")}
+          style={{
+            padding: "10px 20px",
+            cursor: "pointer",
+          }}
+        >
+          Manage Jobs
+        </button>
+      </div>
+
       <div
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(3, 250px)",
           gap: "20px",
-          marginTop: "20px",
+          marginTop: "30px",
         }}
       >
         <div style={cardStyle}>
@@ -46,10 +63,6 @@ function AdminDashboard() {
           <h3>Total Students</h3>
           <h2>{dashboardData.totalStudents}</h2>
         </div>
-
-        <h1>Admin Dashboard</h1>
-
-<LogoutButton />
 
         <div style={cardStyle}>
           <h3>Total Recruiters</h3>

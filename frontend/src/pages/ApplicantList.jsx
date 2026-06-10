@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getApplicationsByJob } from "../services/applicationService";
+import {
+  getApplicationsByJob,
+  updateApplicationStatus
+} from "../services/applicationService";
 
 function ApplicantList() {
   const { jobId } = useParams();
@@ -21,6 +24,22 @@ function ApplicantList() {
       console.error(error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleStatusUpdate = async (
+    applicationId,
+    status
+  ) => {
+    try {
+      await updateApplicationStatus(
+        applicationId,
+        status
+      );
+
+      loadApplicants();
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -68,6 +87,33 @@ function ApplicantList() {
               <strong>Status:</strong>{" "}
               {application.status}
             </p>
+
+            <div style={{ marginTop: "10px" }}>
+              <button
+                onClick={() =>
+                  handleStatusUpdate(
+                    application.id,
+                    "SHORTLISTED"
+                  )
+                }
+                style={{
+                  marginRight: "10px",
+                }}
+              >
+                Shortlist
+              </button>
+
+              <button
+                onClick={() =>
+                  handleStatusUpdate(
+                    application.id,
+                    "REJECTED"
+                  )
+                }
+              >
+                Reject
+              </button>
+            </div>
           </div>
         ))
       )}

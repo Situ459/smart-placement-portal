@@ -35,3 +35,14 @@ export const getApplicationsByJob = async (jobId) => {
 
   return response.data;
 };
+
+export const updateApplicationStatus = async (
+  applicationId,
+  status
+) => {
+  const response = await axios.put(
+    `${BASE_URL}/applications/${applicationId}/status?status=${status}`
+  );
+
+  return response.data;
+};

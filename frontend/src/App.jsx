@@ -10,7 +10,7 @@ import MyApplications from "./pages/MyApplications";
 import PostJob from "./pages/PostJob";
 import MyJobs from "./pages/MyJobs";
 import ApplicantList from "./pages/ApplicantList";
-
+import AdminJobs from "./pages/AdminJobs";
 import ProtectedRoute from "./routes/ProtectedRoute";
 
 function App() {
@@ -90,6 +90,15 @@ function App() {
   element={
     <ProtectedRoute allowedRole="RECRUITER">
       <ApplicantList />
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/admin-jobs"
+  element={
+    <ProtectedRoute allowedRole="ADMIN">
+      <AdminJobs />
     </ProtectedRoute>
   }
 />

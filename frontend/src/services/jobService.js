@@ -34,3 +34,11 @@ export const getJobById = async (id) => {
 
   return response.data;
 };
+
+export const deleteJob = async (jobId) => {
+  const response = await axios.delete(
+    `${BASE_URL}/jobs/${jobId}`
+  );
+
+  return response.data;
+};
