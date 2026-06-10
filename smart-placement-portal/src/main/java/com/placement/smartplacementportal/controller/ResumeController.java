@@ -4,8 +4,9 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import org.springframework.web.multipart.MultipartFile;
 
 import com.placement.smartplacementportal.entity.Resume;
@@ -44,15 +45,33 @@ public class ResumeController {
                 file);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteResume(@PathVariable Long id) {
-        resumeService.deleteResume(id);
+    @GetMapping("/download/{resumeId}")
+    public ResponseEntity<Resource> downloadResume(
+            @PathVariable Long resumeId)
+            throws IOException {
+
+        return resumeService
+                .downloadResume(resumeId);
     }
 
     @GetMapping("/student/{studentId}")
     public List<Resume> getResumesByStudent(
             @PathVariable Long studentId) {
 
-        return resumeService.getResumesByStudent(studentId);
+        return resumeService
+                .getResumesByStudent(studentId);
+    }
+
+    @GetMapping("/student/{studentId}/latest")
+    public Resume getLatestResumeByStudent(
+            @PathVariable Long studentId) {
+
+        return resumeService
+                .getLatestResumeByStudent(studentId);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteResume(@PathVariable Long id) {
+        resumeService.deleteResume(id);
     }
 }

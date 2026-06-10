@@ -15,6 +15,7 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 import AdminStudents from "./pages/AdminStudents";
 import AdminRecruiters from "./pages/AdminRecruiters";
 import EditJob from "./pages/EditJob";
+import UploadResume from "./pages/UploadResume";
 
 function App() {
   return (
@@ -129,6 +130,15 @@ function App() {
   element={
     <ProtectedRoute allowedRole="RECRUITER">
       <EditJob />
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/upload-resume"
+  element={
+    <ProtectedRoute allowedRole="STUDENT">
+      <UploadResume />
     </ProtectedRoute>
   }
 />

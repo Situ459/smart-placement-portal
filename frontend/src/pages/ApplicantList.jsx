@@ -5,6 +5,8 @@ import {
   updateApplicationStatus
 } from "../services/applicationService";
 
+import { getLatestResume } from "../services/resumeService";
+
 function ApplicantList() {
   const { jobId } = useParams();
 
@@ -40,6 +42,28 @@ function ApplicantList() {
       loadApplicants();
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  const handleViewResume = async (
+    studentId
+  ) => {
+    try {
+      const resume =
+        await getLatestResume(studentId);
+
+      if (!resume) {
+        alert("No resume found");
+        return;
+      }
+
+      window.open(
+        `http://localhost:8080/resumes/download/${resume.id}`,
+        "_blank"
+      );
+    } catch (error) {
+      console.error(error);
+      alert("Unable to open resume");
     }
   };
 
@@ -84,11 +108,29 @@ function ApplicantList() {
             </p>
 
             <p>
+              <strong>Skills:</strong>{" "}
+              {application.student.skills}
+            </p>
+
+            <p>
               <strong>Status:</strong>{" "}
               {application.status}
             </p>
 
             <div style={{ marginTop: "10px" }}>
+              <button
+                onClick={() =>
+                  handleViewResume(
+                    application.student.id
+                  )
+                }
+                style={{
+                  marginRight: "10px",
+                }}
+              >
+                View Resume
+              </button>
+
               <button
                 onClick={() =>
                   handleStatusUpdate(

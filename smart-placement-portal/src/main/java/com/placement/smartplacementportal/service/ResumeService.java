@@ -2,11 +2,16 @@ package com.placement.smartplacementportal.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -56,6 +61,22 @@ public class ResumeService {
         return resumeRepository.findByStudent(student);
     }
 
+    public Resume getLatestResumeByStudent(
+            Long studentId) {
+
+        Student student = studentRepository
+                .findById(studentId)
+                .orElse(null);
+
+        if (student == null) {
+            return null;
+        }
+
+        return resumeRepository
+                .findTopByStudentOrderByUploadedAtDesc(
+                        student);
+    }
+
     public Resume uploadResume(
             Long studentId,
             MultipartFile file)
@@ -74,16 +95,11 @@ public class ResumeService {
                         + "_"
                         + file.getOriginalFilename();
 
-        File directory =
-                new File(uploadDir);
+        File directory = new File(uploadDir);
 
         if (!directory.exists()) {
             directory.mkdirs();
         }
-
-        System.out.println(
-                "Upload Directory = "
-                        + directory.getAbsolutePath());
 
         File destination =
                 new File(directory, fileName);
@@ -94,12 +110,44 @@ public class ResumeService {
 
         resume.setStudent(student);
         resume.setFileName(fileName);
-        resume.setFilePath(
-                destination.getAbsolutePath());
-
-        resume.setUploadedAt(
-                LocalDateTime.now());
+        resume.setFilePath(destination.getAbsolutePath());
+        resume.setUploadedAt(LocalDateTime.now());
 
         return resumeRepository.save(resume);
+    }
+
+    public ResponseEntity<Resource> downloadResume(
+            Long resumeId)
+            throws IOException {
+
+        Resume resume = resumeRepository
+                .findById(resumeId)
+                .orElse(null);
+
+        if (resume == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        File file = new File(
+                resume.getFilePath());
+
+        if (!file.exists()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        ByteArrayResource resource =
+                new ByteArrayResource(
+                        Files.readAllBytes(
+                                file.toPath()));
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_PDF)
+                .header(
+                        "Content-Disposition",
+                        "inline; filename=\""
+                                + resume.getFileName()
+                                + "\"")
+                .contentLength(file.length())
+                .body(resource);
     }
 }

@@ -10,7 +10,9 @@ import com.placement.smartplacementportal.entity.Student;
 public interface ResumeRepository extends JpaRepository<Resume, Long> {
 
     List<Resume> findByStudent(Student student);
-    
+
     long countByStudentId(Long studentId);
 
+    Resume findTopByStudentOrderByUploadedAtDesc(
+            Student student);
 }

@@ -95,6 +95,16 @@ function StudentDashboard() {
         >
           My Applications
         </button>
+
+        <button
+          onClick={() => navigate("/upload-resume")}
+          style={{
+            padding: "10px 20px",
+            cursor: "pointer",
+          }}
+        >
+          Upload Resume
+        </button>
       </div>
     </div>
   );
